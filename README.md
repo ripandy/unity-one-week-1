@@ -1,2 +1,2 @@
-# unity-one-week-1
-Unity One Week Game Jam
+# Unity One Week #1
+First time participating in Unity One Week Game Jam #unity1week
