@@ -40,7 +40,6 @@ public class SceneGameplayController : SceneControllerBase
             Vector2 cursor = m_mainCamera.ScreenToWorldPoint(Input.mousePosition);
             Vector2 pPos = players[activePlayer].transform.position;
             Vector2 v = (cursor - pPos).normalized * players[activePlayer].MoveSpeed;
-            Debug.Log("speed? " + v);
             playerRBs[activePlayer].velocity = v;
         }
     }

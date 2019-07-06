@@ -801,12 +801,6 @@ MonoBehaviour:
   - {fileID: 967436483}
   - {fileID: 99098575}
   energyBall: {fileID: 563262865}
---- !u!4 &1567861335 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3855532526229529516, guid: 848a4c214fcbf48ee941481417d12d89,
-    type: 3}
-  m_PrefabInstance: {fileID: 3855532527080147451}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1719109353
 GameObject:
   m_ObjectHideFlags: 0
@@ -816,6 +810,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1719109354}
+  - component: {fileID: 1719109355}
   m_Layer: 0
   m_Name: Enemies
   m_TagString: Untagged
@@ -831,79 +826,26 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1719109353}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1.07, y: -0.28, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1567861335}
+  m_Children: []
   m_Father: {fileID: 1105345626}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &3855532527080147451
-PrefabInstance:
+--- !u!114 &1719109355
+MonoBehaviour:
   m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1719109354}
-    m_Modifications:
-    - target: {fileID: 3855532526229529517, guid: 848a4c214fcbf48ee941481417d12d89,
-        type: 3}
-      propertyPath: m_Name
-      value: Enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 3855532526229529516, guid: 848a4c214fcbf48ee941481417d12d89,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -8.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 3855532526229529516, guid: 848a4c214fcbf48ee941481417d12d89,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 3855532526229529516, guid: 848a4c214fcbf48ee941481417d12d89,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3855532526229529516, guid: 848a4c214fcbf48ee941481417d12d89,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3855532526229529516, guid: 848a4c214fcbf48ee941481417d12d89,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3855532526229529516, guid: 848a4c214fcbf48ee941481417d12d89,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3855532526229529516, guid: 848a4c214fcbf48ee941481417d12d89,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3855532526229529516, guid: 848a4c214fcbf48ee941481417d12d89,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3855532526229529516, guid: 848a4c214fcbf48ee941481417d12d89,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3855532526229529516, guid: 848a4c214fcbf48ee941481417d12d89,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3855532526229529516, guid: 848a4c214fcbf48ee941481417d12d89,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 848a4c214fcbf48ee941481417d12d89, type: 3}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1719109353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d71c50dd890704a7ea27f01cc2993f44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPrefabs: {fileID: 3855532526229529517, guid: 848a4c214fcbf48ee941481417d12d89,
+    type: 3}
+  spawnPoints:
+  - {x: -0.2, y: -2.385, z: 0}
+  spawnRate: 1
