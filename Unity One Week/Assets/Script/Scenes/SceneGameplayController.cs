@@ -8,20 +8,40 @@
 public class SceneGameplayController : SceneControllerBase
 {
     [SerializeField] PlayerController[] players;
+    [SerializeField] EnergyBall energyBall;
+
+    Camera m_mainCamera;
+    Rigidbody2D[] playerRBs;
 
     int activePlayer = 0;
 
-    void Start()
+    protected override void Awake()
     {
+        base.Awake();
+        m_mainCamera = Camera.main;
 
+        playerRBs = new Rigidbody2D[players.Length];
+        for (int i = 0; i < players.Length; i++)
+        {
+            playerRBs[i] = players[i].GetComponent<Rigidbody2D>();
+        }
     }
 
-    void Update()
+    protected override void Start()
+    {
+        energyBall.Reset();
+        energyBall.StartGathering();
+        base.Start();
+    }
+
+    void FixedUpdate()
     {
         if (Input.GetMouseButton(0)) {
-            Vector2 cursor = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            // RaycastHit2D[] hits = Physics2D.RaycastAll(cursor, Vector2.zero, 0f);
-            players[activePlayer].transform.DOMove(cursor, 1f);
+            Vector2 cursor = m_mainCamera.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 pPos = players[activePlayer].transform.position;
+            Vector2 v = (cursor - pPos).normalized * players[activePlayer].MoveSpeed;
+            Debug.Log("speed? " + v);
+            playerRBs[activePlayer].velocity = v;
         }
     }
 }
