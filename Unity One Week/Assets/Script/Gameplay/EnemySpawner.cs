@@ -9,11 +9,12 @@ using UniRx;
 
 public class EnemySpawner : MonoBehaviour
 {
+    const float MAX_HEIGHT = 30f;
+
     [SerializeField] GameObject enemyPrefabs;
-    [SerializeField] List<Vector3> spawnPoints = new List<Vector3>();
+    [SerializeField] Transform[] charaTransforms;
     
-    List<GameObject> enemies = new List<GameObject>();
-    List<int> inactiveEnemies = new List<int>();
+    List<Enemy> enemies = new List<Enemy>();
 
     [Range(0f, 50f)]
     [SerializeField] float spawnRate = 1f;
@@ -27,8 +28,28 @@ public class EnemySpawner : MonoBehaviour
 
     void Start()
     {
+        Observable.Interval(System.TimeSpan.FromMilliseconds(1000f))
+            .Subscribe(_ => {
+                foreach (var enemy in enemies)
+                {
+                    enemy.UpdateSpeed();
+                }
+            }).AddTo(this);
+    }
+
+    public void StartSpawning()
+    {
         spawnInterval = 1f / SpawnRate;
         StartCoroutine(SpawnCoroutine());
+    }
+
+    public void StopSpawning()
+    {
+        foreach (var enemy in enemies)
+        {
+            enemy.gameObject.SetActive(false);
+        }
+        StopAllCoroutines();
     }
 
     IEnumerator SpawnCoroutine()
@@ -42,16 +63,54 @@ public class EnemySpawner : MonoBehaviour
     void SpawnEnemy()
     {
         Vector3 spawnPos = new Vector3(0f, 0f, 0f);
-        if (inactiveEnemies.Count > 0) {
+        int rVal = Random.Range(0, 2);
+        float px = 0f;
+        if (rVal == 0) {
+            px = 999f;
+            foreach (var chara in charaTransforms)
+            {
+                px = Mathf.Min(chara.position.x, px);
+            }
+            px -= 20f;
+        } else {
+            px = -999f;
+            foreach (var chara in charaTransforms)
+            {
+                px = Mathf.Max(chara.position.x, px);
+            }
+            px += 20f;
+        }
+        spawnPos.x = px;
+        spawnPos.y = Random.Range(-2.385f, MAX_HEIGHT);
+        
+        Enemy enemy = null;
+        int idx = 0;
+        bool found = false;
+        while (!found && idx < enemies.Count)
+        {
+            if (!enemies[idx].gameObject.activeInHierarchy)
+            {
+                found = true;
+            }
+            else
+            {
+                idx++;
+            }
+        }
+        if (found) {
             // reuse
-            int idx = inactiveEnemies[0];
-            inactiveEnemies.RemoveAt(0);
-            enemies[idx].transform.position = spawnPos;
-            enemies[idx].SetActive(true);
+            enemy = enemies[idx];
+            enemy.transform.position = spawnPos;
+            enemy.gameObject.SetActive(true);
         } else {
             // spawn new
-            var enemy = Instantiate(enemyPrefabs, spawnPos, Quaternion.identity);
+            var go = Instantiate(enemyPrefabs, spawnPos, Quaternion.identity);
+            enemy = go.GetComponent<Enemy>();
             enemies.Add(enemy);
         }
+        enemy.SetTarget(charaTransforms[rVal]);
+
+        SpawnRate += 0.05f;
+        Debug.Log("Spawning again in " + spawnInterval + "sec");
     }
 }

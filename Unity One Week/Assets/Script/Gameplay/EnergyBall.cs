@@ -29,7 +29,7 @@ public class EnergyBall : MonoBehaviour
 
     public void Reset()
     {
-        SetEnergy(0);
+        SetEnergy(1);
     }
 
     public void StartGathering()
@@ -39,7 +39,7 @@ public class EnergyBall : MonoBehaviour
 
     public void AddEnergy(float energy)
     {
-        SetEnergy(Energy + energy);
+        SetEnergy( Mathf.Max(0, Energy + energy) );
     }
 
     void SetEnergy(float energy)
